@@ -35,7 +35,7 @@ Uzantıyı yükledikten sonra, aşağıdaki adımları takip ederek bir video ar
 
 ## Ana Sayfa
 <div align=center >
-   <img src="https://github.com/user-attachments/assets/a8d88cf2-4742-4eed-82ef-25bf8292c28b" alt="Ana Sayfa" width=50%>
+   <img src="https://github.com/user-attachments/assets/caf3dbf7-68b9-45d7-bbb7-f4574207d3f2" alt="Ana Sayfa" width=50%>
 </div>
 Uzantı, kullanıcıların video döngüsü ayarlarını yapabilmesi için basit ve kullanıcı dostu bir popup arayüzüne sahiptir. Başlangıç ve bitiş zamanlarını girip, video döngüsünü başlatmak için aşağıdaki ekran görüntüsünü kullanabilirsiniz:
 Bu arayüz, kullanıcıların videolarını döngüye almak için gerekli başlangıç ve bitiş zamanlarını kolayca girmelerini sağlar.
@@ -325,7 +325,7 @@ Popup arayüzünün HTML yapısını içerir. Kullanıcılar, video döngüsün�
           </svg>
           Başlangıç Zamanı
         </label>
-        <input type="text" id="start" placeholder="1:25 formatında girin" required>
+        <input type="text" id="start" placeholder="7:23 formatında girin" required>
       </div>
 
       <div class="input-group">
@@ -337,7 +337,7 @@ Popup arayüzünün HTML yapısını içerir. Kullanıcılar, video döngüsün�
           </svg>
           Bitiş Zamanı
         </label>
-        <input type="text" id="end" placeholder="2:45 formatında girin" required>
+        <input type="text" id="end" placeholder="20:18 formatında girin" required>
       </div>
 
       <button type="submit" class="btn">
