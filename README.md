@@ -15,12 +15,13 @@
 
 ## Kurulum
 1. **Chrome Uzantısını Yükleyin:**
-   - Bu uzantıyı yüklemek için, `manifest.json` dosyasının bulunduğu klasöre gidin.
+   - Bu uzantıyı `Code` buttunundan ve `Download ZIP` buttonuna tıklayarak indirin.
+   - Bu uzantıyı Chrome tarayıcısına yüklemek için, `manifest.json` dosyasının bulunduğu klasöre gidin.
    - Chrome'da `chrome://extensions/` sayfasına gidin.
    - Sağ üst köşedeki **Geliştirici modu**nu etkinleştirin.
    - **Paketlenmemiş uzantıyı yükle** butonuna tıklayın ve indirdiğiniz klasörü seçin.
 
-2. **Uzantıyı Aktif Hale Getirin:**
+3. **Uzantıyı Aktif Hale Getirin:**
    - Uzantı, simgesine tıkladığınızda aktif olur ve YouTube videolarında çalışmaya başlar.
 
 ## Kullanım
