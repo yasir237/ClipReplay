@@ -1,28 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ClipReplay</title>
   <link rel="stylesheet" href="popup.css">
 </head>
+
 <body>
   <div class="container">
-    <h1>ClipReplay</h1>
+    <div class="header">
+      <h1 class="logo">Clip<span>Replay</span></h1>
+      <p class="subtitle">Video bölümlerini kolayca döngüye alın</p>
+    </div>
+
     <form id="loopForm">
-      <div>
-        <label for="start">Başlangıç (dakika:saniye)</label>
-        <input type="text" id="start" placeholder="dakika:saniye -> örnek: 1:20" required>
+      <div class="input-group">
+        <label for="start">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          Başlangıç Zamanı
+        </label>
+        <input type="text" id="start" placeholder="1:25 formatında girin" required>
       </div>
-      <div>
-        <label for="end">Bitiş (dakika:saniye)</label>
-        <input type="text" id="end" placeholder="dakika:saniye -> örnek: 3:45" required>
+
+      <div class="input-group">
+        <label for="end">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          Bitiş Zamanı
+        </label>
+        <input type="text" id="end" placeholder="2:45 formatında girin" required>
       </div>
-      <button type="submit">Loop Ayarla</button>
+
+      <button type="submit" class="btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        Döngüyü Başlat
+      </button>
     </form>
-    <p id="statusText" class="status">Videonuz için loop ayarlayın!</p>
-    <button id="stopButton" class="stopButton" style="display:none;">Loop'u Durdur</button>
+
+    <p id="statusText" class="status">Videonuz için döngü ayarını yapın</p>
+    <div class="icon-wrapper">
+      <img class="img" src="icons/whiteLogo.png" alt="Loading...">
+    </div>
+
+
+    <button id="stopButton" class="btn stop-btn hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="6" y="6" width="12" height="12" rx="2" ry="2"></rect>
+      </svg>
+      Döngüyü Durdur
+    </button>
   </div>
+
   <script src="popup.js"></script>
 </body>
+
 </html>
