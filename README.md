@@ -4,7 +4,7 @@
 
 
 <div align=center >
-   <img src="https://github.com/user-attachments/assets/6b5746e2-3323-46bf-938b-7711cbe9508d" alt="Logo" width=50%>
+   <img src="https://github.com/user-attachments/assets/d74a2b02-cb32-4ce8-81d2-8bb6495ed252" alt="Logo" width=50%>
 </div>
 
 ## Özellikler
@@ -29,25 +29,25 @@ Uzantıyı yükledikten sonra, aşağıdaki adımları takip ederek bir video ar
 1. YouTube üzerinde bir video açın.
 2. Uzantının simgesine tıklayın.
 3. Başlangıç ve bitiş zamanlarını (dakika:saniye) girin.
-4. **Set Loop** butonuna tıklayın.
+4. **Döngüyü Başlat** butonuna tıklayın.
 5. Video, belirlediğiniz zaman aralığında kesintisiz bir şekilde döngüye girecektir.
 
 ## Ana Sayfa
 <div align=center >
-   <img src="https://github.com/user-attachments/assets/35beed87-89c4-406d-be17-9e45525c94fa" alt="Ana Sayfa" width=50%>
+   <img src="https://github.com/user-attachments/assets/a8d88cf2-4742-4eed-82ef-25bf8292c28b" alt="Ana Sayfa" width=50%>
 </div>
 Uzantı, kullanıcıların video döngüsü ayarlarını yapabilmesi için basit ve kullanıcı dostu bir popup arayüzüne sahiptir. Başlangıç ve bitiş zamanlarını girip, video döngüsünü başlatmak için aşağıdaki ekran görüntüsünü kullanabilirsiniz:
-Bu arayüz, kullanıcıların videolarını döngüye almak için gerekli başlangıç ve bitiş zamanlarını kolayca girmelerini sağlar. "Loop Ayarla" butonuna tıkladığınızda video belirtilen zaman aralığında döngüye girer.
+Bu arayüz, kullanıcıların videolarını döngüye almak için gerekli başlangıç ve bitiş zamanlarını kolayca girmelerini sağlar.
 
-## Loop Başlatıldığında
+## Döngü Başlatıldığında
 <div align=center >
-   <img src="https://github.com/user-attachments/assets/3a8806a0-b70b-405d-84e0-efd364bf3157" alt="Loop Başlatıldığında" width=50%>
+   <img src="https://github.com/user-attachments/assets/4d2b90bf-c60a-4f42-9a8f-dbfd5da4cddf" alt="Loop Başlatıldığında" width=50%>
 </div>
-Döngü başlatıldığında, popup penceresinde ayarlanan zaman dilimiyle birlikte "Loop Başlatıldı" mesajı gösterilir ve döngü işlemi başlar. Aşağıda bu ekranın bir örneğini bulabilirsiniz:
+Döngü başlatıldığında, popup penceresinde ayarlanan zaman dilimiyle birlikte "döngü çalışıyor" mesajı gösterilir ve döngü işlemi başlar.
 
 
-## Loop'u Durdurmak
-Video döngüsünü durdurmak için, popup penceresinde yer alan "Loop'u Durdur" butonuna tıklayarak işlemi sonlandırabilirsiniz. Bu işlem, video zamanlayıcısını sıfırlayacak ve döngüyü durduracaktır. Aşağıda durdurma ekranının görselini görebilirsiniz:
+## Döngüyü Durdurmak
+Video döngüsünü durdurmak için, popup penceresinde yer alan "Döngüyü Durdur" butonuna tıklayarak işlemi sonlandırabilirsiniz. Bu işlem, video zamanlayıcısını sıfırlayacak ve döngüyü durduracaktır. Aşağıda durdurma ekranının görselini görebilirsiniz:
 
 ## Kod Yapısı
 
@@ -118,83 +118,176 @@ Bu dosya, uzantının temel yapılandırmasını ve gerekli izinleri içerir. Yo
 Uzantının popup penceresinin stilini tanımlar. Video döngüsü ayarlama arayüzü bu stil dosyasına dayanır.
 
 ```css
-body {
-  font-family: Arial, sans-serif;
+:root {
+  --primary-color: #e74c3c;
+  --primary-hover: #c0392b;
+  --bg-color: #1a1a1a;
+  --card-bg: #252525;
+  --text-color: #f5f5f5;
+  --input-bg: #333333;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background: #202020;
-  color: #fff;
-  width: 300px;
-  height: 250px;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  width: 320px;
+  min-height: 280px;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 15px;
 }
 
 .container {
-  text-align: center;
-  width: 90%;
+  width: 100%;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  box-shadow: var(--box-shadow);
 }
 
-h1 {
-  font-size: 20px;
+.header {
+  text-align: center;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 5px;
+}
+
+.icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.img {
+  width: 50px;
+}
+
+.logo span {
+  color: var(--primary-color);
+}
+
+.subtitle {
+  font-size: 12px;
+  color: #aaa;
   margin-bottom: 15px;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
 }
 
 label {
-  font-size: 14px;
-  text-align: left;
+  font-size: 13px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+label svg {
+  margin-right: 5px;
 }
 
 input {
-  padding: 8px;
-  font-size: 14px;
-  border-radius: 5px;
-  border: none;
-  margin-top: 7px;
-  margin-bottom: 7px;
-}
-
-button {
-  background: #b60808;
+  background-color: var(--input-bg);
+  border: 1px solid #444;
   color: #fff;
-  border: none;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: var(--border-radius);
+  font-size: 14px;
+  transition: all 0.2s ease;
 }
 
-button:hover {
-  background: #cc0000;
+input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+}
+
+input::placeholder {
+  color: #777;
+}
+
+.btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 15px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.btn svg {
+  margin-right: 6px;
+}
+
+.btn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.stop-btn {
+  background-color: #444;
+  margin-top: 15px;
+}
+
+.stop-btn:hover {
+  background-color: #555;
 }
 
 .status {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #ccc;
+  text-align: center;
+  font-size: 13px;
+  color: #bbb;
+  margin-top: 15px;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: var(--border-radius);
 }
 
-#stopButton {
-  display: none;
+.time-info {
+  color: var(--primary-color);
+  font-weight: 600;
 }
 
-#loopForm {
-  display: block;
-}
-
-#stopButton.show {
-  display: block;
-}
-
-#loopForm.hide {
+.hidden {
   display: none;
 }
 ```
@@ -205,32 +298,74 @@ Popup arayüzünün HTML yapısını içerir. Kullanıcılar, video döngüsün�
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ClipReplay</title>
   <link rel="stylesheet" href="popup.css">
 </head>
+
 <body>
   <div class="container">
-    <h1>ClipReplay</h1>
+    <div class="header">
+      <h1 class="logo">Clip<span>Replay</span></h1>
+      <p class="subtitle">Video bölümlerini kolayca döngüye alın</p>
+    </div>
+
     <form id="loopForm">
-      <div>
-        <label for="start">Başlangıç (dakika:saniye)</label>
-        <input type="text" id="start" placeholder="dakika:saniye -> örnek: 1:20" required>
+      <div class="input-group">
+        <label for="start">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          Başlangıç Zamanı
+        </label>
+        <input type="text" id="start" placeholder="1:25 formatında girin" required>
       </div>
-      <div>
-        <label for="end">Bitiş (dakika:saniye)</label>
-        <input type="text" id="end" placeholder="dakika:saniye -> örnek: 3:45" required>
+
+      <div class="input-group">
+        <label for="end">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          Bitiş Zamanı
+        </label>
+        <input type="text" id="end" placeholder="2:45 formatında girin" required>
       </div>
-      <button type="submit">Loop Ayarla</button>
+
+      <button type="submit" class="btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        Döngüyü Başlat
+      </button>
     </form>
-    <p id="statusText" class="status">Videonuz için loop ayarlayın!</p>
-    <button id="stopButton" class="stopButton" style="display:none;">Loop'u Durdur</button>
+
+    <p id="statusText" class="status">Videonuz için döngü ayarını yapın</p>
+    <div class="icon-wrapper">
+      <img class="img" src="icons/whiteLogo.png" alt="Loading...">
+    </div>
+
+
+    <button id="stopButton" class="btn stop-btn hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="6" y="6" width="12" height="12" rx="2" ry="2"></rect>
+      </svg>
+      Döngüyü Durdur
+    </button>
   </div>
+
   <script src="popup.js"></script>
 </body>
+
 </html>
 ```
 
@@ -240,36 +375,33 @@ Bu dosya, popup arayüzünde kullanıcının girdiği veriyi işleyip döngüye 
 
 ```javascript
 document.addEventListener('DOMContentLoaded', () => {
-
-  // burada yerel hafızadan getirdim, eğer tıklanmışsa stop butonu gözükecek
+  // Yerel hafızadan verileri getir
   const isLooping = localStorage.getItem('isLooping') === 'true';
   const startTime = localStorage.getItem('startTime');
   const endTime = localStorage.getItem('endTime');
   
-  // burada hangi itemler gözükecek karar veriyor
+  // Arayüzü duruma göre güncelle
   if (isLooping) {
-    document.getElementById('stopButton').style.display = "inline-block";
-    document.getElementById('loopForm').style.display = "none";
-    document.getElementById('statusText').textContent = `Loop ayarlandı: ${startTime} - ${endTime}`;
+    document.getElementById('stopButton').classList.remove('hidden');
+    document.getElementById('loopForm').classList.add('hidden');
+    document.getElementById('statusText').innerHTML = `<span class="time-info">${startTime} - ${endTime}</span> arasında döngü çalışıyor`;
   } else {
-    document.getElementById('stopButton').style.display = "none";
-    document.getElementById('loopForm').style.display = "block";
+    document.getElementById('stopButton').classList.add('hidden');
+    document.getElementById('loopForm').classList.remove('hidden');
   }
 });
 
-// tıklandığında başlayacak
+// Form gönderildiğinde
 document.getElementById('loopForm').addEventListener('submit', (event) => {
-
-  event.preventDefault(); // bu sayfa yüklemesin diye yazdım
+  event.preventDefault();
   
-  // hepsini const olarak tanımladım, temiz bir js kodu yazmak için
   const startInput = document.getElementById('start').value;
   const endInput = document.getElementById('end').value;
 
   const startSeconds = timeToSeconds(startInput);
   const endSeconds = timeToSeconds(endInput);
 
-
+  // Videoyu döngüye al
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs.length > 0) {
       chrome.scripting.executeScript({
@@ -280,18 +412,18 @@ document.getElementById('loopForm').addEventListener('submit', (event) => {
     }
   });
 
-  // burada yerele kaydediyorum
+  // Durumu yerel hafızaya kaydet
   localStorage.setItem('isLooping', 'true');
   localStorage.setItem('startTime', startInput);
   localStorage.setItem('endTime', endInput);
 
-  // bilgileri kullanıcıya yazdırıyorum
-  document.getElementById('statusText').textContent = `Loop ayarlandı: ${startInput} - ${endInput}`;
-  document.getElementById('stopButton').style.display = "inline-block";
-  document.getElementById('loopForm').style.display = "none";
+  // Arayüzü güncelle
+  document.getElementById('statusText').innerHTML = `<span class="time-info">${startInput} - ${endInput}</span> arasında döngü çalışıyor`;
+  document.getElementById('stopButton').classList.remove('hidden');
+  document.getElementById('loopForm').classList.add('hidden');
 });
 
-// durdur tıklandığında
+// Durdur butonuna tıklandığında
 document.getElementById('stopButton').addEventListener('click', () => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs.length > 0) {
@@ -299,47 +431,62 @@ document.getElementById('stopButton').addEventListener('click', () => {
         target: { tabId: tabs[0].id },
         func: stopLoop,
       });
+      
     }
   });
 
+  // Yerel hafızadaki verileri temizle
   localStorage.removeItem('isLooping');
   localStorage.removeItem('startTime');
   localStorage.removeItem('endTime');
 
-  document.getElementById('statusText').textContent = "Loop durduruldu!";
-  document.getElementById('stopButton').style.display = "none";
-  document.getElementById('loopForm').style.display = "block";
+  // Arayüzü güncelle
+  document.getElementById('statusText').textContent = "Döngü durduruldu";
+  document.getElementById('stopButton').classList.add('hidden');
+  document.getElementById('loopForm').classList.remove('hidden');
 });
 
-// her seferinde tekrar çalışacak
+// Video döngüsü işlevi
 function loopVideo(start, end) {
   const video = document.querySelector('video');
   if (video) {
     video.currentTime = start;
 
-    video.addEventListener('timeupdate', () => {
+    // Eğer önceden dinleyici varsa kaldır
+    if (video._loopHandler) {
+      video.removeEventListener('timeupdate', video._loopHandler);
+    }
+
+    // Yeni kontrol fonksiyonu oluştur
+    const checkTime = () => {
       if (video.currentTime >= end) {
         video.currentTime = start;
       }
-    });
+    };
+
+    // Dinleyiciyi ekle ve referansı sakla
+    video.addEventListener('timeupdate', checkTime);
+    video._loopHandler = checkTime;
   } else {
-    alert("Bu sayfada video yok.");
+    alert("Bu sayfada video bulunamadı!");
   }
 }
 
-// durdur değinde sayfa geri yüklensin, böylece tüm işlemler sıfırlanır
+// Döngüyü durdurma işlevi
 function stopLoop() {
   const video = document.querySelector('video');
-  if (video) {
-    window.location.reload();
+  if (video && video._loopHandler) {
+    video.removeEventListener('timeupdate', video._loopHandler);
+    delete video._loopHandler;
   }
 }
 
-// zamanı hesaplamak için ayrı bir fonkisyon yazdım
+
+// Dakika:saniye formatını saniyeye çevirme
 function timeToSeconds(time) {
   const parts = time.split(':');
-  const minutes = parseInt(parts[0]);
-  const seconds = parseInt(parts[1]);
+  const minutes = parseInt(parts[0]) || 0;
+  const seconds = parseInt(parts[1]) || 0;
   return (minutes * 60) + seconds;
 }
 
