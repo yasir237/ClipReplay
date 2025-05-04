@@ -1,34 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-  // burada yerel hafızadan getirdim, eğer tıklanmışsa stop butonu gözükecek
+  // Yerel hafızadan verileri getir
   const isLooping = localStorage.getItem('isLooping') === 'true';
   const startTime = localStorage.getItem('startTime');
   const endTime = localStorage.getItem('endTime');
   
-  // burada hangi itemler gözükecek karar veriyor
+  // Arayüzü duruma göre güncelle
   if (isLooping) {
-    document.getElementById('stopButton').style.display = "inline-block";
-    document.getElementById('loopForm').style.display = "none";
-    document.getElementById('statusText').textContent = `Loop ayarlandı: ${startTime} - ${endTime}`;
+    document.getElementById('stopButton').classList.remove('hidden');
+    document.getElementById('loopForm').classList.add('hidden');
+    document.getElementById('statusText').innerHTML = `<span class="time-info">${startTime} - ${endTime}</span> arasında döngü çalışıyor`;
   } else {
-    document.getElementById('stopButton').style.display = "none";
-    document.getElementById('loopForm').style.display = "block";
+    document.getElementById('stopButton').classList.add('hidden');
+    document.getElementById('loopForm').classList.remove('hidden');
   }
 });
 
-// tıklandığında başlayacak
+// Form gönderildiğinde
 document.getElementById('loopForm').addEventListener('submit', (event) => {
-
-  event.preventDefault(); // bu sayfa yüklemesin diye yazdım
+  event.preventDefault();
   
-  // hepsini const olarak tanımladım, temiz bir js kodu yazmak için
   const startInput = document.getElementById('start').value;
   const endInput = document.getElementById('end').value;
 
   const startSeconds = timeToSeconds(startInput);
   const endSeconds = timeToSeconds(endInput);
 
-
+  // Videoyu döngüye al
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs.length > 0) {
       chrome.scripting.executeScript({
@@ -39,18 +36,18 @@ document.getElementById('loopForm').addEventListener('submit', (event) => {
     }
   });
 
-  // burada yerele kaydediyorum
+  // Durumu yerel hafızaya kaydet
   localStorage.setItem('isLooping', 'true');
   localStorage.setItem('startTime', startInput);
   localStorage.setItem('endTime', endInput);
 
-  // bilgileri kullanıcıya yazdırıyorum
-  document.getElementById('statusText').textContent = `Loop ayarlandı: ${startInput} - ${endInput}`;
-  document.getElementById('stopButton').style.display = "inline-block";
-  document.getElementById('loopForm').style.display = "none";
+  // Arayüzü güncelle
+  document.getElementById('statusText').innerHTML = `<span class="time-info">${startInput} - ${endInput}</span> arasında döngü çalışıyor`;
+  document.getElementById('stopButton').classList.remove('hidden');
+  document.getElementById('loopForm').classList.add('hidden');
 });
 
-// durdur tıklandığında
+// Durdur butonuna tıklandığında
 document.getElementById('stopButton').addEventListener('click', () => {
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs.length > 0) {
@@ -58,46 +55,61 @@ document.getElementById('stopButton').addEventListener('click', () => {
         target: { tabId: tabs[0].id },
         func: stopLoop,
       });
+      
     }
   });
 
+  // Yerel hafızadaki verileri temizle
   localStorage.removeItem('isLooping');
   localStorage.removeItem('startTime');
   localStorage.removeItem('endTime');
 
-  document.getElementById('statusText').textContent = "Loop durduruldu!";
-  document.getElementById('stopButton').style.display = "none";
-  document.getElementById('loopForm').style.display = "block";
+  // Arayüzü güncelle
+  document.getElementById('statusText').textContent = "Döngü durduruldu";
+  document.getElementById('stopButton').classList.add('hidden');
+  document.getElementById('loopForm').classList.remove('hidden');
 });
 
-// her seferinde tekrar çalışacak
+// Video döngüsü işlevi
 function loopVideo(start, end) {
   const video = document.querySelector('video');
   if (video) {
     video.currentTime = start;
 
-    video.addEventListener('timeupdate', () => {
+    // Eğer önceden dinleyici varsa kaldır
+    if (video._loopHandler) {
+      video.removeEventListener('timeupdate', video._loopHandler);
+    }
+
+    // Yeni kontrol fonksiyonu oluştur
+    const checkTime = () => {
       if (video.currentTime >= end) {
         video.currentTime = start;
       }
-    });
+    };
+
+    // Dinleyiciyi ekle ve referansı sakla
+    video.addEventListener('timeupdate', checkTime);
+    video._loopHandler = checkTime;
   } else {
-    alert("Bu sayfada video yok.");
+    alert("Bu sayfada video bulunamadı!");
   }
 }
 
-// durdur değinde sayfa geri yüklensin, böylece tüm işlemler sıfırlanır
+// Döngüyü durdurma işlevi
 function stopLoop() {
   const video = document.querySelector('video');
-  if (video) {
-    window.location.reload();
+  if (video && video._loopHandler) {
+    video.removeEventListener('timeupdate', video._loopHandler);
+    delete video._loopHandler;
   }
 }
 
-// zamanı hesaplamak için ayrı bir fonkisyon yazdım
+
+// Dakika:saniye formatını saniyeye çevirme
 function timeToSeconds(time) {
   const parts = time.split(':');
-  const minutes = parseInt(parts[0]);
-  const seconds = parseInt(parts[1]);
+  const minutes = parseInt(parts[0]) || 0;
+  const seconds = parseInt(parts[1]) || 0;
   return (minutes * 60) + seconds;
 }
